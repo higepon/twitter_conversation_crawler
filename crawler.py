@@ -188,6 +188,8 @@ def main():
             except KeyboardInterrupt:
                 print('Stopped')
                 return
+            except http.client.IncompleteRead as e:
+                print("Incomplete read", e)
             except (socket.error, http.client.HTTPException):
                 print("HTTP error waiting for a few seconds")
                 time.sleep(delay)
