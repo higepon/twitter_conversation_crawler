@@ -16,3 +16,14 @@ This script stores a conversation in sqlite tables (conversation and status tabl
 ````
 % python crawler.py --db conversation.db --lang=en
 ````
+
+3. Open another terminal and see if you have some conversations stored in the database.
+````
+% sqlite3 conversation.db
+SQLite version 3.13.0 2016-05-18 10:57:30
+Enter ".help" for usage hints.
+sqlite> select * from conversation limit 1;
+960023899768532994|960106507491823616|960118686488162304
+sqlite> select * from status where id = 960118686488162304;
+...
+````
