@@ -8,6 +8,7 @@ import time
 from enum import Enum
 
 import tweepy
+import urllib3
 import yaml
 from tweepy import OAuthHandler, Stream
 from tweepy.streaming import StreamListener
@@ -188,7 +189,7 @@ def main():
             except KeyboardInterrupt:
                 print('Stopped')
                 return
-            except http.client.IncompleteRead as e:
+            except urllib3.exceptions.ProtocolError as e:
                 print("Incomplete read", e)
             except (socket.error, http.client.HTTPException):
                 print("HTTP error waiting for a few seconds")
