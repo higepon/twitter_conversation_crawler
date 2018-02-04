@@ -1,2 +1,18 @@
-# twitter_conversation_crawler
-Twitter Conversation Crawler
+# Twitter Conversation Crawler
+You can crawl twitter conversations. A conversation consists of 3 tweets.
+- Origin tweet by user A
+- Reply tweet by user B
+- One more reply tweet by user A
+
+This script stores a conversation in sqlitetables (conversation and status table).
+
+## How it works
+### Setup
+
+1. Copy the `config.yml.default` to `config.yml`, and fill your twitter application tokens you got from [twitter developers](https://apps.twitter.com/).
+
+
+2. Then run as follows, please replace [en] with your language. 
+````
+% python twitter_conversations.py --db conversation.db --lang=[en]
+````
