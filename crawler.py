@@ -191,6 +191,8 @@ def main():
                 return
             except urllib3.exceptions.ProtocolError as e:
                 print("Incomplete read", e)
+            except urllib3.exceptions.ReadTimeoutError as e:
+                print("Read Timeout", e)
             except (socket.error, http.client.HTTPException):
                 print("HTTP error waiting for a few seconds")
                 time.sleep(delay)
