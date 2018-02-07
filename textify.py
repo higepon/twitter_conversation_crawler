@@ -1,13 +1,15 @@
 import argparse
+import re
 import sqlite3
 import sys
-import re
 
 
+# class to dump conversation as text from db.
 class Dumper:
     def __init__(self, db):
         self.db = db
-        self.url_regexp = re.compile(r"https?:\/\/")
+        self.url_regexp = re.compile(r"https?://")
+        self.name_regexp = re.compile(r"@([A-Za-z0-9_]+)")
 
     def dump(self):
         conn = sqlite3.connect(self.db)
@@ -21,6 +23,7 @@ class Dumper:
             text2 = self.tweet_text(conn, sid2)
             text3 = self.tweet_text(conn, sid3)
             if self.is_valid_conversation(text1, text2, text3):
+                text1, text2, text3 = self.mapper(text1, text2, text3)
                 print("{}\n{}\n{}".format(text1, text2, text3))
         conn.close()
 
@@ -32,6 +35,11 @@ class Dumper:
                 return False
 
         return True
+
+    def mapper(self, text1, text2, text3):
+        text2 = re.sub(self.name_regexp, '@john', text2)
+        text3 = re.sub(self.name_regexp, '@paul', text3)
+        return text1, text2, text3
 
     @staticmethod
     def tweet_text(conn, sid):
