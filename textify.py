@@ -37,8 +37,10 @@ class Dumper:
         return True
 
     def mapper(self, text1, text2, text3):
-        text2 = re.sub(self.name_regexp, '@john', text2)
-        text3 = re.sub(self.name_regexp, '@paul', text3)
+        #text2 = re.sub(self.name_regexp, '@john', text2)
+        #text3 = re.sub(self.name_regexp, '@paul', text3)
+        text2 = re.sub(self.name_regexp, '', text2)
+        text3 = re.sub(self.name_regexp, '', text3)
         return text1, text2, text3
 
     @staticmethod
